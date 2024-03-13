@@ -1,0 +1,7 @@
+﻿sbline
+ee
+mouse
+notems
+verinfo
+hc-status
+cls

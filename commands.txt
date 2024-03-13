@@ -5,3 +5,4 @@ notems
 verinfo
 hc-status
 cls
+init

@@ -20,7 +20,7 @@
     #loadpage {
       width: 100%;
       height: 100vh;
-      z-index: -1;
+      z-index: 100000;
       display: flex;
       /* flex 造福世界 */
       justify-content: center;
@@ -60,17 +60,17 @@
     </svg>
     <div id="infoDiv">Starting</div>
   </div>
-  <div id="terminal" style="opacity:0 ;transition: opacity 0.5s ease-out; display:none"></div>
+  <div id="terminal" style="opacity:0 ;transition: opacity 0.5s ease-out;"></div>
   <script>
     let rotation = 25;
     var svg_c = document.getElementById('svg_c');
     var loadpage = document.getElementById('loadpage');
     var rotation_c = setInterval(() => {
-      rotation += 10;
+      rotation += 11.52;
       svg_c.setAttribute('transform', `rotate(${rotation} 53.0706 49.0405)`);
     }, 10);
   </script>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 
 </html>

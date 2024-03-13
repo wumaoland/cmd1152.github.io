@@ -12,12 +12,15 @@
       script.src = `commands/${name}.js`;
       document.head.appendChild(script);
     });
-    loadpage.style.opacity = 0;
     setTimeout(()=>{
-      document.getElementById('terminal').style.opacity = 1;
-      term.focus()
-      loadpage.style.display = "none";
-    }, 500);
+      loadpage.style.opacity = 0;
+      setTimeout(()=>{
+        document.getElementById('terminal').style.opacity = 1;
+        document.getElementById('terminal').style.display = "block";
+        term.focus()
+        loadpage.style.display = "none";
+      }, 500);
+    }, 1152);
   })
   .catch(error => {
     window.dispatchEvent(new ErrorEvent('error', {

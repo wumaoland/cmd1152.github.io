@@ -9,6 +9,8 @@
     }
     return byteLength;
 }
+var tabs = [];
+var tabsIndex = 0;
 term.onData((data) => {
     function deltext() {
         let oldl = calculateByteLength(text);
@@ -24,35 +26,28 @@ term.onData((data) => {
             pushMessage(`${(oldl > calculateByteLength(text) + 1) ? "[D [D" : ""}`, false)
         }
     }
+    function settext(texts) {
+        function donea() {
+            text = texts
+            pushMessage(`\r${texts}`, false)
+        }
+        function nexta() {
+            deltext()
+            if (text == "") {
+                donea()
+            } else nexta()
+        } 
+        nexta()
+    }
     if (canType) {
         if (data.startsWith("")) {
             if (data == "[A") {
                 commandindex += 1;
                 if (commandindex > commandhistory.length) commandindex = commandhistory.length;
-                function donea() {
-                    text = commandhistory[commandhistory.length - commandindex] ? commandhistory[commandhistory.length - commandindex] : '';
-                    pushMessage(`\r${text}`, false)
-                }
-                function nexta() {
-                    deltext()
-                    if (text == "") {
-                        donea()
-                    } else nexta()
-                }
-                nexta()
+                settext(commandhistory[commandhistory.length - commandindex] ? commandhistory[commandhistory.length - commandindex] : '');
             } else if (data == "[B") {
                 commandindex = Math.max(commandindex - 1, 0);
-                function doneb() {
-                    text = commandhistory[commandhistory.length - commandindex] ? commandhistory[commandhistory.length - commandindex] : '';
-                    pushMessage(`${text}`, false);
-                }
-                function nextb() {
-                    deltext()
-                    if (text == "") {
-                        doneb()
-                    } else nextb()
-                }
-                nextb()
+                settext(commandhistory[commandhistory.length - commandindex] ? commandhistory[commandhistory.length - commandindex] : '');
             }
         } else {
             if (data == atob("DQ")) {
@@ -78,7 +73,23 @@ term.onData((data) => {
                 })()
             } else if (data == atob("fw")) {
                 deltext()
+            } else if (data == atob("CQ")) {
+                if (text.split(" ").length == 1) {
+                    if (tabs.length > 0) {
+                        tabsIndex += 1;
+                        if (tabsIndex == tabs.length) tabsIndex = 0;
+                        if (tabs[tabsIndex]) settext(tabs[tabsIndex]);
+                    } else {
+                        tabs = [];
+                        for (let k in COMMANDS) {
+                            if (k.startsWith(text)) tabs.push(k);
+                        }
+                        tabsIndex = 0;
+                        if (tabs[tabsIndex]) settext(tabs[tabsIndex]);
+                    }
+                }
             } else {
+                tabs = [];
                 text += data
                 pushMessage(data, (Math.floor(calculateByteLength(text) / term.cols) == calculateByteLength(text) / term.cols))
             }
@@ -113,9 +124,14 @@ COMMANDS.help = {
             } else pushMessage("\x1B[37mUnknow Command.\x1B[0m")
 
         } else {
+            let maxlength = 0
+            let sortedCommands = Object.keys(COMMANDS).sort((a, b) => a.localeCompare(b))
             for (let k in COMMANDS) {
-                pushMessage(` ${k}${Array(10 - k.length).fill(" ").join("")}${COMMANDS[k].help}`)
+                if (k.length > maxlength) maxlength = k.length;
             }
+            sortedCommands.forEach(k=>{
+                pushMessage(` ${k}${Array(maxlength - k.length).fill(" ").join("")} ${COMMANDS[k].help}`)
+            })
             pushMessage("");
             pushMessage("Use \x1B[37mhelp [command]\x1B[0m to show more help...");
         }

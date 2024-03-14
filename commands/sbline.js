@@ -73,6 +73,7 @@ term.onData((data) => {
                 })()
             } else if (data == atob("fw")) {
                 deltext()
+                tabs = [];
             } else if (data == atob("CQ")) {
                 if (text.split(" ").length == 1) {
                     if (tabs.length > 0) {

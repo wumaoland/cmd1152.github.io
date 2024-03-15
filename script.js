@@ -1,7 +1,9 @@
 ﻿fetch('commands.txt')
   .then(response => {
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      window.dispatchEvent(new ErrorEvent('error', {
+        message: 'Unable to load command'
+      }));
     }
     return response.text();
   })

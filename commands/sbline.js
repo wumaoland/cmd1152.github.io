@@ -128,10 +128,10 @@ COMMANDS.help = {
             let maxlength = 0
             let sortedCommands = Object.keys(COMMANDS).sort((a, b) => a.localeCompare(b))
             for (let k in COMMANDS) {
-                if (k.length > maxlength) maxlength = k.length;
+                if (k.length > maxlength && !COMMANDS[k].hidden) maxlength = k.length;
             }
             sortedCommands.forEach(k=>{
-                pushMessage(` ${k}${Array(maxlength - k.length).fill(" ").join("")} ${COMMANDS[k].help}`)
+                if (!COMMANDS[k].hidden) pushMessage(` ${k}${Array(maxlength - k.length).fill(" ").join("")} ${COMMANDS[k].help}`)
             })
             pushMessage("");
             pushMessage("Use \x1B[37mhelp [command]\x1B[0m to show more help...");

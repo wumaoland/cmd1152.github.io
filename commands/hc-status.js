@@ -9,7 +9,7 @@
             ws.onmessage = (e) => {
                 var hc = JSON.parse(e.data);
                 if (hc.cmd == "session") {
-                    pushMessage("--- HackChat Statuu ---");
+                    pushMessage("--- HackChatStatus ---");
                     pushMessage("");
                     pushMessage("+--------------------+");
                     pushMessage("| Channel     | User |");

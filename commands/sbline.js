@@ -65,7 +65,7 @@ term.onData((data) => {
                             } catch (err) {
                                 pushMessage(`\x1B[91mKernel error while executing command: ${err.message}\x1B[0m`)
                             }
-                        } else pushMessage("\x1B[37mUnknow Command.\x1B[0m")
+                        } else pushMessage("\x1B[37mUnknown Command.\x1B[0m")
                     }
                     text = "";
                     canType = true

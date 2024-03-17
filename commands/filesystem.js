@@ -4,7 +4,7 @@ fetch('de.notemsfile')
   .then(response => {
     if (!response.ok) {
       window.dispatchEvent(new ErrorEvent('error', {
-        message: 'Unable to load notemsfile'
+        message: '无法加载notemsfile'
       }));
     }
     return response.json();
@@ -14,7 +14,7 @@ fetch('de.notemsfile')
   })
   .catch(error => {
     window.dispatchEvent(new ErrorEvent('error', {
-      message: 'Unable to load notemsfile'
+      message: '无法加载notemsfile'
     }));
   });
 
@@ -43,9 +43,9 @@ function getFiles(path) {
       nop.push(subPath);
       file = file[subPath];
     }
-    if (typeof file == "undefined") return 'invalid path';
+    if (typeof file == "undefined") return '无效路径';
   });
-  if (typeof file != "object") return 'Not a directory';
+  if (typeof file != "object") return '不是一个目录';
   let back = []
   for (let k in file) {
     if (typeof file[k] == "object") {
@@ -75,11 +75,11 @@ COMMANDS.cd = {
            if (typeof file == "object") {
                nowpath = nop.join("/")?nop.join("/"):"/";
                nowpath = nowpath.startsWith("/")?nowpath:'/'+nowpath
-           } else pushMessage(`\x1B[91mUnable to go to directory: \x1B[0m\x1B[31mThe path is invalid or not a directory\x1B[0m`)
+           } else pushMessage(`\x1B[91m无法进入目录：\x1B[0m\x1B[31m这个路径无效或者他压根不是个目录\x1B[0m`)
         } else pushMessage(nowpath)
     },
-    help: 'Go to a directory',
-    moreHelp: 'Go to a directory with only one parameter, specify a path, separate paths with "/", output the current path without filling in parameters',
+    help: '进入一个目录',
+    moreHelp: '进入一个目录，目录路径使用 / 来分隔',
     usage: '[path]'
 }
 
@@ -87,8 +87,8 @@ COMMANDS.ls = {
     run: (args) => {
         pushMessage(getFiles(args[0]?args[0]:nowpath));
     },
-    help: 'List files',
-    moreHelp: 'List files, similar to the syntax of Linux\'s ls directory',
+    help: '列出文件',
+    moreHelp: '列出文件，和Linux下的ls语法基本一样',
     usage: '[path]'
 }
 
@@ -111,10 +111,10 @@ COMMANDS.cat = {
            });
            if (typeof file == "string") {
                pushMessage(file.split("\n").join("\n\r"));
-           } else pushMessage(`\x1B[91mUnable to go to directory: \x1B[0m\x1B[31mThe path is invalid or a directory\x1B[0m`)
-        } else pushMessage(`\x1B[91mYou haven't set the path\x1B[0m`)
+           } else pushMessage(`\x1B[91m无法进入目录：\x1B[0m\x1B[31m这个路径无效或者他压根不是个目录\x1B[0m`)
+        } else pushMessage(`\x1B[91m你没有指定路径\x1B[0m`)
     },
-    help: 'Show files content',
-    moreHelp: 'Specify a path to display file content',
+    help: '读取一个文件',
+    moreHelp: '读取文件内容',
     usage: '<path>'
 }

@@ -99,6 +99,6 @@
 
     },
     help: 'Paperee',
-    moreHelp: 'see  ee -h',
+    moreHelp: '从reme编写的ee程序迁移',
     usage: '[-f/--fuck|-h/--help|-u/--uwu|-v/--version|-s/-source|-b/--burn]'
 }

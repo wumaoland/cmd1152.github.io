@@ -104,11 +104,6 @@ var commandhistory = [];
 var commandindex = 0;
 var canType = true
 var text = ""
-
-function getRandomItemFromArray(arr) {
-    var randomIndex = Math.floor(Math.random() * arr.length);
-    return arr[randomIndex];
-}
 function pushMessage(arg, enter = true) {
     term.write(`${arg}${enter ? "\n\r" : ""}`)
 }
@@ -121,8 +116,8 @@ COMMANDS.help = {
                 pushMessage("");
                 pushMessage(COMMANDS[args[0]]["moreHelp"]);
                 pushMessage("");
-                pushMessage(`Usage: ${args[0]} ${COMMANDS[args[0]].usage}`);
-            } else pushMessage("\x1B[37mUnknow Command.\x1B[0m")
+                pushMessage(`用法：${args[0]} ${COMMANDS[args[0]].usage}`);
+            } else pushMessage("\x1B[37m未知命令\x1B[0m")
 
         } else {
             let maxlength = 0
@@ -134,10 +129,10 @@ COMMANDS.help = {
                 if (!COMMANDS[k].hidden) pushMessage(` ${k}${Array(maxlength - k.length).fill(" ").join("")} ${COMMANDS[k].help}`)
             })
             pushMessage("");
-            pushMessage("Use \x1B[37mhelp [command]\x1B[0m to show more help...");
+            pushMessage("使用 \x1B[37mhelp [command]\x1B[0m 查看详细帮助...");
         }
     },
-    help: 'Show help',
-    moreHelp: 'Display a help list. If you know the command, you can display detailed help and usage for the corresponding command.',
+    help: '显示帮助',
+    moreHelp: '显示帮助列表，如果指定命令，将显示该命令详细帮助',
     usage: '[command]'
 }

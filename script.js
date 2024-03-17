@@ -2,7 +2,7 @@
   .then(response => {
     if (!response.ok) {
       window.dispatchEvent(new ErrorEvent('error', {
-        message: 'Unable to load command'
+        message: '无法载入命令列表'
       }));
     }
     return response.text();
@@ -17,14 +17,12 @@
   })
   .catch(error => {
     window.dispatchEvent(new ErrorEvent('error', {
-      message: 'Unable to load command'
+      message: '无法载入命令列表'
     }));
   });
-
-const infoDiv = document.getElementById('infoDiv');
 window.addEventListener('error', function(event) {
   const message = event.message || 'Unknown error';
-  infoDiv.innerText = 'Core Error: ' + message;
+  infoDiv.innerText = '内核错误：' + message;
   document.getElementById('terminal').style.opacity = 0;
   loadpage.style.display = "flex";
   setTimeout(()=>{
@@ -32,7 +30,7 @@ window.addEventListener('error', function(event) {
     document.getElementById('terminal').style.display = "none";
   }, 500)
   setTimeout(()=>{
-    infoDiv.innerText = "About to overload";
+    infoDiv.innerText = "全部重载";
     setTimeout(()=>{location.reload()},1000);
   }, 3000);
 });
@@ -51,7 +49,7 @@ window.onresize = () => {
   try {
     if (text) {
       text = "";
-      pushMessage("\n\r\x1B[91mAdjust window during input? This is not a good choice\x1b[92m")
+      pushMessage("\n\r\x1B[91m在输入时改变窗口大小并不可取\x1b[92m")
     }
   } catch (e) {}
 }

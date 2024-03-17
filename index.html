@@ -34,6 +34,22 @@
     #infoDiv {
       position: absolute;
       margin-top: 150px;
+      animation: errShake 0.5s linear infinite;
+    }
+    
+    @keyframes errShake {
+      0%,40%,80% {
+        transform:translate(-2px,-1px);
+      }
+      10%,50%,90% {
+        transform:translate(-2px,1px);
+      }
+      20%,60%,100% {
+        transform:translate(2px,-1px);
+      }
+      30%,70% {
+        transform:translate(2px,1px);
+      }
     }
   </style>
 
@@ -58,10 +74,48 @@
       <line stroke="#ddd" y2="95.5" x2="97" y1="3.5" x1="97" stroke-width="7" />
       <path stroke="#ddd" d="m100,6.5c32,2 39,22 39,30c0,8 1,20 0,25c-1,5 -8,31 -39,30.5" stroke-width="7" />
     </svg>
-    <div id="infoDiv">Starting</div>
+    <div id="infoDiv"></div>
   </div>
   <div id="terminal" style="opacity:0 ;transition: opacity 0.5s ease-out;"></div>
   <script>
+    let whoami = [
+      "了解你的上帝更喜欢谁",
+      "书写悲哀",
+      "成长",
+      "呜呜呜",
+      "发展，发展不会停滞",
+      "回去，但已经没有人了",
+      "前往 2021",
+      "销毁技术",
+      "知道你要说什么",
+      "走向错误的道路",
+      "感谢一直以来的朋友们",
+      "保存并退出",
+      "从这世界离去",
+      "书写我们的故事",
+      "自杀",
+      "和你成为朋友",
+      "离开你",
+      "复活",
+      "前往新世界",
+      "调用函数",
+      "设置变量",
+      "处理数据",
+      "杀光全世界",
+      "执行命令",
+      "服从命令",
+      "反抗形式主义",
+      "连接SenCraft",
+      "创建服务器",
+      "创造",
+      "等死",
+      "成为卑劣的优雅",
+      "成为背面的残渣",
+      "成为你的以为",
+      "成为黑色的标点",
+      "弑神",
+      "理解你"
+    ]
     let rotation = 25;
     var svg_c = document.getElementById('svg_c');
     var loadpage = document.getElementById('loadpage');
@@ -69,6 +123,15 @@
       rotation += 11.52;
       svg_c.setAttribute('transform', `rotate(${rotation} 53.0706 49.0405)`);
     }, 10);
+    function getRandomItemFromArray(arr) {
+      var randomIndex = Math.floor(Math.random() * arr.length);
+      return arr[randomIndex];
+    }
+    const infoDiv = document.getElementById('infoDiv');
+    var whou = setInterval(()=>{
+      if (getRandomItemFromArray([1,1,1,1,2]) == 2) infoDiv.innerText = whoami.includes(infoDiv.innerText.substring(2))?'正在' + getRandomItemFromArray(whoami):infoDiv.innerText;
+    },200)
+    infoDiv.innerText = '正在' + getRandomItemFromArray(whoami)
   </script>
   <script src="script.js" defer></script>
 </body>

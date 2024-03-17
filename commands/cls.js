@@ -2,7 +2,7 @@
     run: () => {
         term.clear()
     },
-    help: '清空屏幕',
-    moreHelp: '清空屏幕',
+    help: 'clear screen',
+    moreHelp: 'clear screen',
     usage: ''
 }

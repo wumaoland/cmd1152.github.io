@@ -116,8 +116,8 @@ COMMANDS.help = {
                 pushMessage("");
                 pushMessage(COMMANDS[args[0]]["moreHelp"]);
                 pushMessage("");
-                pushMessage(`用法：${args[0]} ${COMMANDS[args[0]].usage}`);
-            } else pushMessage("\x1B[37m未知命令\x1B[0m")
+                pushMessage(`Usage：${args[0]} ${COMMANDS[args[0]].usage}`);
+            } else pushMessage("\x1B[37mUnknow Command\x1B[0m")
 
         } else {
             let maxlength = 0
@@ -129,10 +129,10 @@ COMMANDS.help = {
                 if (!COMMANDS[k].hidden) pushMessage(` ${k}${Array(maxlength - k.length).fill(" ").join("")} ${COMMANDS[k].help}`)
             })
             pushMessage("");
-            pushMessage("使用 \x1B[37mhelp [command]\x1B[0m 查看详细帮助...");
+            pushMessage("Use \x1B[37mhelp [command]\x1B[0m to show more help...");
         }
     },
-    help: '显示帮助',
-    moreHelp: '显示帮助列表，如果指定命令，将显示该命令详细帮助',
+    help: 'Show Help',
+    moreHelp: 'Display the help list. If a command is specified, detailed help for that command will be displayed',
     usage: '[command]'
 }

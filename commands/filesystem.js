@@ -4,7 +4,7 @@ fetch('de.notemsfile')
   .then(response => {
     if (!response.ok) {
       window.dispatchEvent(new ErrorEvent('error', {
-        message: '无法加载notemsfile'
+        message: 'Unable to load notemsfile'
       }));
     }
     return response.json();
@@ -14,7 +14,7 @@ fetch('de.notemsfile')
   })
   .catch(error => {
     window.dispatchEvent(new ErrorEvent('error', {
-      message: '无法加载notemsfile'
+      message: 'Unable to load notemsfile'
     }));
   });
 
@@ -43,9 +43,9 @@ function getFiles(path) {
       nop.push(subPath);
       file = file[subPath];
     }
-    if (typeof file == "undefined") return '无效路径';
+    if (typeof file == "undefined") return 'invalid path';
   });
-  if (typeof file != "object") return '不是一个目录';
+  if (typeof file != "object") return 'Not a directory';
   let back = []
   for (let k in file) {
     if (typeof file[k] == "object") {
@@ -75,11 +75,11 @@ COMMANDS.cd = {
            if (typeof file == "object") {
                nowpath = nop.join("/")?nop.join("/"):"/";
                nowpath = nowpath.startsWith("/")?nowpath:'/'+nowpath
-           } else pushMessage(`\x1B[91m无法进入目录：\x1B[0m\x1B[31m这个路径无效或者他压根不是个目录\x1B[0m`)
+           } else pushMessage(`\x1B[91mUnable to enter directory: \x1B[0m\x1B[31mThis path is invalid or it is not a directory at all\x1B[0m`)
         } else pushMessage(nowpath)
     },
-    help: '进入一个目录',
-    moreHelp: '进入一个目录，目录路径使用 / 来分隔',
+    help: 'Enter a directory',
+    moreHelp: 'Enter a directory with directory paths separated by "/"',
     usage: '[path]'
 }
 
@@ -87,8 +87,8 @@ COMMANDS.ls = {
     run: (args) => {
         pushMessage(getFiles(args[0]?args[0]:nowpath));
     },
-    help: '列出文件',
-    moreHelp: '列出文件，和Linux下的ls语法基本一样',
+    help: 'List file',
+    moreHelp: 'List files, similar to the ls syntax in Linux',
     usage: '[path]'
 }
 
@@ -111,10 +111,10 @@ COMMANDS.cat = {
            });
            if (typeof file == "string") {
                pushMessage(file.split("\n").join("\n\r"));
-           } else pushMessage(`\x1B[91m无法进入目录：\x1B[0m\x1B[31m这个路径无效或者他压根不是个目录\x1B[0m`)
-        } else pushMessage(`\x1B[91m你没有指定路径\x1B[0m`)
+           } else pushMessage(`\x1B[91mUnable to read file: \x1B[0m\x1B[31mThis path is invalid or it is a directory\x1B[0m`)
+        } else pushMessage(`\x1B[91mYou did not specify a path\x1B[0m`)
     },
-    help: '读取一个文件',
-    moreHelp: '读取文件内容',
+    help: 'Read a File',
+    moreHelp: 'Read a File',
     usage: '<path>'
 }

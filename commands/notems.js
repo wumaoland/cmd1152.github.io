@@ -2,7 +2,7 @@
     run: (args) => {
         return new Promise(resolve => {
             window.dispatchEvent(new ErrorEvent('error', {
-                message: '并没有错误，你是个错误'
+                message: 'There are no mistakes, you are the mistake'
             }));
             let method = args[0];
             let fetbody = null;
@@ -17,7 +17,7 @@
                     fetbody.join(" ");
                     fetthod = "POST"
                 } else if (method.toLocaleLowerCase() != "get") {
-                    pushMessage("\x1B[91m未知操作\x1B[0m", true, true);
+                    pushMessage("\x1B[91mUnknown Method\x1B[0m", true, true);
                     resolve();
                 }
                 fetch(feturls, {
@@ -29,10 +29,10 @@
                         if (response.ok) {
                             return response.text();
                         } else {
-                            pushMessage("\x1B[91操作失败:\x1B[0m", true, true);
+                            pushMessage("\x1B[91Error:\x1B[0m", true, true);
                             if (response.status == 429) {
-                                pushMessage("\x1B[91m操作过快\x1B[0m", true, true);
-                            } else pushMessage("\x1B[91m服务器出错\x1B[0m", true, true);
+                                pushMessage("\x1B[91mToo fast\x1B[0m", true, true);
+                            } else pushMessage("\x1B[91mServer Error:\x1B[0m", true, true);
                             resolve();
                         }
                     })
@@ -45,12 +45,12 @@
                         resolve();
                     })
             } else {
-                pushMessage("\x1B[91m未知路径\x1B[0m", true, true);
+                pushMessage("\x1B[91mUnknow path\x1B[0m", true, true);
                 resolve();
             }
         })
     },
-    help: '读写note.ms页面',
-    moreHelp: '读写note.ms页面',
-    usage: '[set/get] [path] <text(允许空格)>'
+    help: 'Read/Edit note.ms page',
+    moreHelp: 'Read/Edit note.ms page',
+    usage: '[set/get] [path] <text(allow space)>'
 }

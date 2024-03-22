@@ -22,7 +22,7 @@ function executeCommand() {
     if (commands[cmdindex]) {
         canType = false
         setTimeout(nextCommand,1152)
-    }
+    } else canType = true
 }
 function typeCommand(cmd) {
     canType = true

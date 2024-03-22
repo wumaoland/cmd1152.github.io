@@ -11,7 +11,8 @@
 }
 var tabs = [];
 var tabsIndex = 0;
-term.onData((data) => {
+term.onData(sbline)
+function sbline(data,allowType = true) {
     function deltext() {
         let oldl = calculateByteLength(text);
         if (oldl == 0) return;
@@ -68,7 +69,7 @@ term.onData((data) => {
                         } else pushMessage("\x1B[37mUnknown Command.\x1B[0m")
                     }
                     text = "";
-                    canType = true
+                    if (allowType) canType = true
                     pushMessage("\x1b[92m", false)
                 })()
             } else if (data == atob("fw")) {
@@ -96,7 +97,7 @@ term.onData((data) => {
             }
         }
     }
-})
+}
 setTimeout(() => {
     document.getElementsByClassName("xterm-char-measure-element")[0].style.display = 'none';
 }, 10)

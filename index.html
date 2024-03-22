@@ -36,6 +36,11 @@
       margin-top: 150px;
       animation: errShake 0.5s linear infinite;
     }
+
+    #svg_c {
+      animation: ilove4n0n4me 0.5s linear infinite;
+      transform-origin: 53.0706px 49.0405px;
+    }
     
     @keyframes errShake {
       0%,40%,80% {
@@ -51,6 +56,16 @@
         transform:translate(2px,1px);
       }
     }
+
+    @keyframes ilove4n0n4me {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 
   <script src="xterm.js"></script>
@@ -61,7 +76,7 @@
 <body>
   <div id="loadpage">
     <svg width="102" height="100" xmlns="http://www.w3.org/2000/svg" style="vector-effect: non-scaling-stroke;">
-      <path transform="rotate(25 53.0706 49.0405)" stroke="#fff" id="svg_c"
+      <path stroke="#fff" id="svg_c"
         d="m96.13127,51.77417c3.46972,21.12592 -16.82986,42.49967 -42.38926,40.56841c-25.5594,-1.93126 -44.11947,-15.46202 -44.11947,-48.29345c0,-32.83143 36.80341,-44.9363 62.61116,-35.12458"
         stroke-width="7" fill="none" />
     </svg>
@@ -129,13 +144,7 @@
       "维护",
       "干什么？"
     ]
-    let rotation = 25;
-    var svg_c = document.getElementById('svg_c');
     var loadpage = document.getElementById('loadpage');
-    var rotation_c = setInterval(() => {
-      rotation += 11.52;
-      svg_c.setAttribute('transform', `rotate(${rotation} 53.0706 49.0405)`);
-    }, 10);
     function getRandomItemFromArray(arr) {
       var randomIndex = Math.floor(Math.random() * arr.length);
       return arr[randomIndex];

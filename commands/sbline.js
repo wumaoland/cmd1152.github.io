@@ -76,19 +76,33 @@ function sbline(data,allowType = true) {
                 deltext()
                 tabs = [];
             } else if (data == atob("CQ")) {
-                if (text.split(" ").length == 1) {
-                    if (tabs.length > 0) {
-                        tabsIndex += 1;
-                        if (tabsIndex == tabs.length) tabsIndex = 0;
-                        if (tabs[tabsIndex]) settext(tabs[tabsIndex]);
-                    } else {
-                        tabs = [];
+                
+                if (tabs.length > 0) {
+                    tabsIndex += 1;
+                    if (tabsIndex == tabs.length) tabsIndex = 0;
+                    if (tabs[tabsIndex]) settext(tabs[tabsIndex]);
+                } else {
+                    tabs = [];
+                    tabsIndex = 0;
+                    if (text.split(" ").length == 1) {
                         for (let k in COMMANDS) {
                             if (k.startsWith(text)) tabs.push(k);
                         }
-                        tabsIndex = 0;
-                        if (tabs[tabsIndex]) settext(tabs[tabsIndex]);
+                    } else {
+                        let padText = text.split(" ")
+                        let padCmd = padText.pop()
+                        let padPath = padCmd.split("/")
+                        let padFile = padPath.pop()
+                        let nowFiles = getFiles(nowpath + '/' + padPath.join("/")).split("\n\r")
+                        let canFiles = []
+                        nowFiles.forEach(nowFile=>{
+                            if (nowFile.startsWith(padFile)) canFiles.push(nowFile)
+                        })
+                        canFiles.forEach(canFile=>{
+                            if (canFile != "Not a directory") tabs.push(`${padText.join(" ")} ${padPath.join("/")}${padPath.length>0?"/":""}${canFile}`.replace(/\/\//g,'/'))
+                        })
                     }
+                    if (tabs[tabsIndex]) settext(tabs[tabsIndex]);
                 }
             } else {
                 tabs = [];

@@ -96,7 +96,7 @@ function sbline(data,allowType = true) {
                         let nowFiles = getFiles(nowpath + '/' + padPath.join("/")).split("\n\r")
                         let canFiles = []
                         nowFiles.forEach(nowFile=>{
-                            if (nowFile.startsWith(padFile)) canFiles.push(nowFile)
+                            if (nowFile.startsWith(padFile) || nowFile.startsWith('/' + padFile)) canFiles.push(nowFile)
                         })
                         canFiles.forEach(canFile=>{
                             if (canFile != "Not a directory") tabs.push(`${padText.join(" ")} ${padPath.join("/")}${padPath.length>0?"/":""}${canFile}`.replace(/\/\//g,'/'))

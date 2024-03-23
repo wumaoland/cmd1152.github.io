@@ -16,7 +16,7 @@ COMMANDS.asciimation = {
             let glDataSleep = []
             let glData = ''
             data.split("\n").forEach(lineData=>{
-              if (parseInt(lineData) == lineData && parseInt(lineData) <= 50) { //别大的离谱，最多5秒
+              if (parseInt(lineData) == lineData && parseInt(lineData) <= 70) { //别大的离谱，最多5秒
                 glDataSleep.push(parseInt(lineData))
                 glDatas.push(glData)
                 glData = ''

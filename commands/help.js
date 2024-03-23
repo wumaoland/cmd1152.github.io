@@ -1,5 +1,5 @@
 ﻿let cmdindex = 0
-let commands = ["help",`cat --websocket wss://hack.chat/chat-ws --channel lounge --proxy ./proxys.txt --nickname c_$rnd:10 --anticaptcha --autochangenickname${Array(50).fill("").join('')}${Array(129).fill(atob("fw")).join('')}${Array(20).fill("").join('')}readme.txt`]
+let commands = ["help",`cat readme.txt`]
 function typeStringAndRollback(inputStrings, rollbackFunction, finalFunction, timeInterval) {
     let index = 0;
     const intervalId = setInterval(() => {

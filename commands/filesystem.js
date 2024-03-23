@@ -47,11 +47,17 @@ function getFiles(path) {
   });
   if (typeof file != "object") return 'Not a directory';
   let back = []
-  for (let k in file) {
-    if (typeof file[k] == "object") {
-      back.push('/' + k);
-    } else back.push(k);
-  }
+  let sorfile = Object.keys(file).sort((a, b) => a.localeCompare(b))
+  sorfile.forEach(fileName=>{
+    if (typeof file[fileName] == "object") {
+      back.push('/' + fileName);
+    }
+  })
+  sorfile.forEach(fileName=>{
+    if (typeof file[fileName] != "object") {
+      back.push(fileName);
+    }
+  })
   //排版操作，懒得做
   return back.join('\n\r'); //直接分行
 }

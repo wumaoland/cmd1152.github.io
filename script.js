@@ -20,9 +20,9 @@
       message: 'Unable to load command'
     }));
   });
-window.addEventListener('error', function(event) {
-  const message = event.message || 'Unknown error';
-  infoDiv.innerText = 'Core Error: ' + message;
+
+function reload(message) {
+  infoDiv.innerText = message;
   document.getElementById('terminal').style.opacity = 0;
   loadpage.style.display = "flex";
   setTimeout(()=>{
@@ -33,6 +33,10 @@ window.addEventListener('error', function(event) {
     infoDiv.innerText = "Overload All";
     setTimeout(()=>{location.reload()},1000);
   }, 3000);
+}
+window.addEventListener('error', function(event) {
+  const message = event.message || 'Unknown error';
+  reload('Core Error: ' + message)
 });
 
 const term = new Terminal({
@@ -47,7 +51,7 @@ fitAddon.fit();
 window.onresize = () => { 
   fitAddon.fit(); 
   try {
-    if (text) {
+    if (text && canType) {
       text = "";
       pushMessage("\n\r\x1B[91mChanging the window size during input is not advisable\x1b[92m")
     }
@@ -62,3 +66,6 @@ window.onresize = () => {
             term.write(`${arg}${enter ? "\n\r" : ""}`)
         }
 var COMMANDS = {}
+function pushMessage(arg, enter = true) {
+  term.write(`${arg}${enter ? "\n\r" : ""}`)
+}

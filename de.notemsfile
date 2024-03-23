@@ -1,1 +1,12 @@
-﻿{"hidden":{"4w4.js":"//try run command '4n0n4me'\nfor (let i=0;i<404;i++) pushMessage(\"4n0n4me is god\")\n"},"readme.txt":"各位好啊，这个网站是模仿终端的个人网站，文件系统只读的\n（这不是废话吗）"}
+﻿{
+  "hidden":{
+    "4w4.js":"//try run command '4n0n4me'\nfor (let i=0;i<404;i++) pushMessage(\"4n0n4me is god\")\n"
+  },
+  "secret":{
+    "bomber.txt":"按技术排名：\n名称    |过验证码| 速度（正常速度/验证码速度） | “平安时代”轰炸行为\n0x24a   |  Yes   |         未知  /  未知       |         无\nhlg     |  Yes   |     25~35/30s / 10~20/30s   |        长期\ncmd1152 |  Yes   |     25~40/30s /  未知       |        短期\nJankie  |  未知  |         未知  /  未知       |     仅网络攻击\n4n0n4me |  未知  |         未知  /  未知       |         无\nxuanwei |  No    |         未知  /  未知       |        短期\n注：可能年代久远，数据不太准确\n\ncmd1152：极限模式下 140/30s"
+  },
+  "blog":{
+    "4n0n4me喜获tripauth.txt":"我承认这个事情不值得写成一个文件，但是我没有什么其他东西来填充/blog来掩盖我还没做好这个东西的事实）"
+  },
+  "readme.txt":"这里是MelonCmd，你可以看看help和文件目录以及我在/blog写的博客内容\n试试ls列出目录，cd进入目录，cat读取文件吧"
+}

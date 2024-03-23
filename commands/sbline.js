@@ -105,9 +105,6 @@ var commandhistory = [];
 var commandindex = 0;
 var canType = true
 var text = ""
-function pushMessage(arg, enter = true) {
-    term.write(`${arg}${enter ? "\n\r" : ""}`)
-}
 
 COMMANDS.help = {
     run: (args) => {

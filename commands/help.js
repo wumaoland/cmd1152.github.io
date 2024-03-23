@@ -21,7 +21,7 @@ function executeCommand() {
     cmdindex += 1
     if (commands[cmdindex]) {
         canType = false
-        setTimeout(nextCommand,1152)
+        setTimeout(nextCommand,500)
     } else canType = true
 }
 function typeCommand(cmd) {

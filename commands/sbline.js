@@ -93,13 +93,13 @@ function sbline(data,allowType = true) {
                         let padCmd = padText.pop()
                         let padPath = padCmd.split("/")
                         let padFile = padPath.pop()
-                        let nowFiles = getFiles(nowpath + '/' + padPath.join("/")).split("\n\r")
+                        let nowFiles = getFiles(`${padCmd.startsWith("/")?"/":nowpath+'/'}${padPath.join("/")}`).split("\n\r")
                         let canFiles = []
                         nowFiles.forEach(nowFile=>{
-                            if (nowFile.startsWith(padFile) || nowFile.startsWith('/' + padFile)) canFiles.push(nowFile)
+                            if (nowFile.startsWith(padFile) || nowFile.startsWith('/' + padFile)) canFiles.push(nowFile.replace('/',''))
                         })
                         canFiles.forEach(canFile=>{
-                            if (canFile != "Not a directory") tabs.push(`${padText.join(" ")} ${padPath.join("/")}${padPath.length>0?"/":""}${canFile}`.replace(/\/\//g,'/'))
+                            if (canFile != "Not a directory") tabs.push(`${padText.join(" ")} ${padPath.join("/")}${(padPath.length>0 && padCmd.indexOf("/") != -1 )?"/":""}${canFile}`.replace(/\/\//g,'/'))
                         })
                     }
                     if (tabs[tabsIndex]) settext(tabs[tabsIndex]);

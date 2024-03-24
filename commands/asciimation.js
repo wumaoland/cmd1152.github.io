@@ -1,6 +1,6 @@
 ﻿
 COMMANDS.asciimation = {
-    run: () => {
+    run: (args) => {
       return new Promise(resolve => {
         pushMessage("Loading resource files\r", false);
         fetch('/film.obj')
@@ -28,7 +28,7 @@ COMMANDS.asciimation = {
             term.clear();
             let playIndex = 0
             function nextPage() {
-              if (typeof glDatas[playIndex] != undefined) {
+              if (glDatas[playIndex] != undefined) {
                 if (term.cols < 68) {
                   term.clear()
                   term.write(`\x1B[2J\x1B[HThe page is not wide enough and will be displayed once you adjust the page width to a usable size.`)
@@ -37,8 +37,13 @@ COMMANDS.asciimation = {
                 }
                 term.write(`\x1B[2J\x1B[H${Array(Math.floor((term.rows-13)/2)).fill("\n\r").join('')}${Array(Math.floor((term.cols-68)/2)).fill(" ").join('')}${glDatas[playIndex].split("\n").join(`\n\r${Array(Math.floor((term.cols-68)/2)).fill(" ").join('')}`)}`)
                 playIndex += 1
-                setTimeout(nextPage,glDataSleep[playIndex]*100)
-              } else resolve()
+                let speed = parseFloat(args[0])?parseFloat(args[0]):1
+                speed = speed>0.001?speed:0.001
+                setTimeout(nextPage,Math.max(Math.floor(glDataSleep[playIndex]*100/speed)),1)
+              } else {
+                term.clear()
+                resolve()
+              }
             }
             nextPage()
           })
@@ -50,5 +55,5 @@ COMMANDS.asciimation = {
     },
     help: 'telnet towel.blinkenlights.nl',
     moreHelp: 'telnet towel.blinkenlights.nl',
-    usage: ''
+    usage: '<speed(Default 1)>'
 }

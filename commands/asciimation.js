@@ -27,22 +27,32 @@ COMMANDS.asciimation = {
             //全部准备就绪，清空控制台
             term.clear();
             let playIndex = 0
+            let allms = 0
+            let speed = parseFloat(args[0])?parseFloat(args[0]):1
+            speed = speed>0.1?speed:0.1
+            speed = speed>10?10:speed
+            glDataSleep.forEach(dlData=>{
+              allms += Math.max(Math.floor(dlData*100/speed),1)
+            })
+            let gallms = allms
             function nextPage() {
-              if (glDatas[playIndex] != undefined) {
+              if (glDatas[playIndex] != undefined && !isNaN(allms)) {
                 if (term.cols < 68) {
                   term.clear()
                   term.write(`\x1B[2J\x1B[HThe page is not wide enough and will be displayed once you adjust the page width to a usable size.`)
                   setTimeout(nextPage,500)
                   return;
                 }
-                term.write(`\x1B[2J\x1B[H${Array(Math.floor((term.rows-13)/2)).fill("\n\r").join('')}${Array(Math.floor((term.cols-68)/2)).fill(" ").join('')}${glDatas[playIndex].split("\n").join(`\n\r${Array(Math.floor((term.cols-68)/2)).fill(" ").join('')}`)}`)
+                term.write(`\x1B[2J\x1B[H${Array(Math.floor((term.rows-13)/2)).fill("\n\r").join('')}${Array(Math.floor((term.cols-68)/2)).fill(" ").join('')}${glDatas[playIndex].split("\n").join(`\n\r${Array(Math.floor((term.cols-68)/2)).fill(" ").join('')}`)}[${Array(51-(Math.floor(allms/gallms*50))).fill("=").join('').padEnd(50,' ')}] ETA ${Math.floor(allms/1000)}s  ${speed}x`)
                 playIndex += 1
-                let speed = parseFloat(args[0])?parseFloat(args[0]):1
-                speed = speed>0.001?speed:0.001
-                setTimeout(nextPage,Math.max(Math.floor(glDataSleep[playIndex]*100/speed)),1)
+                allms -= Math.max(Math.floor(glDataSleep[playIndex]*100/speed),1)
+                setTimeout(nextPage,Math.max(Math.floor(glDataSleep[playIndex]*100/speed),1))
               } else {
-                term.clear()
-                resolve()
+                setTimeout(()=>{
+                  term.clear()
+                  term.write(`\x1B[2J\x1B[HWelcome back.`)
+                  resolve()
+                },3000)
               }
             }
             nextPage()

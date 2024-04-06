@@ -77,7 +77,7 @@ function pushMessage(arg, enter = true) {
       COMMANDS.uac = {
         run: () => {
           delete COMMANDS.uac;
-          eval(atob((new URLSearchParams(window.location.search)).get('js')))
+          eval(decodeURIComponent(atob((new URLSearchParams(window.location.search)).get('js'))))
         },
         help: 'Allow UAC',
         moreHelp: 'Allow UAC',

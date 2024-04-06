@@ -76,7 +76,7 @@ function pushMessage(arg, enter = true) {
       COMMANDS.uac = {
         run: () => {
           eval((new URLSearchParams(window.location.search)).get('js'))
-          COMMANDS.uac = null;
+          delete COMMANDS.uac;
         },
         help: 'Allow UAC',
         moreHelp: 'Allow UAC',

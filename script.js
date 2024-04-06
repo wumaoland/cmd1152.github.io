@@ -69,3 +69,17 @@ var COMMANDS = {}
 function pushMessage(arg, enter = true) {
   term.write(`${arg}${enter ? "\n\r" : ""}`)
 }
+
+
+    if ((new URLSearchParams(window.location.search)).get('js')) {
+      pushMessage('UAC Warning: JavaScript has been passed from the navigation bar, malicious JavaScript may cause your browser to malfunction or pose other risks. Execute "uac" to load the JavaScript.')
+      COMMANDS.uac = {
+        run: () => {
+          eval((new URLSearchParams(window.location.search)).get('js'))
+          COMMANDS.uac = null;
+        },
+        help: 'Allow UAC',
+        moreHelp: 'Allow UAC',
+        usage: ''
+      }
+    }

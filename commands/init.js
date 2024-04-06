@@ -7,7 +7,10 @@
     loadpage.style.display = "none";
     clearInterval(whou)
     try {
-      setTimeout(()=>{cmdinit()},500)
+      setTimeout(()=>{
+        while(!cmdinit){}
+        cmdinit()
+      },500)
     } catch (e) {
       window.dispatchEvent(new ErrorEvent('error', {
         message: 'Failed to load initialization function'

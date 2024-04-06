@@ -73,10 +73,11 @@ function pushMessage(arg, enter = true) {
 
     if ((new URLSearchParams(window.location.search)).get('js')) {
       pushMessage('UAC Warning: JavaScript has been passed from the navigation bar, malicious JavaScript may cause your browser to malfunction or pose other risks. Execute "uac" to load the JavaScript.')
+      pushMessage('')
       COMMANDS.uac = {
         run: () => {
-          eval((new URLSearchParams(window.location.search)).get('js'))
           delete COMMANDS.uac;
+          eval(atob((new URLSearchParams(window.location.search)).get('js')))
         },
         help: 'Allow UAC',
         moreHelp: 'Allow UAC',

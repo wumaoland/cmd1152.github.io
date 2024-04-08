@@ -21,6 +21,8 @@
                     pushMessage("");
                     pushMessage(`Online Users: ${hc.users.toString()}`);
                     pushMessage(`Online Channels: ${hc.chans.toString()}`);
+                } else if (hc.text.includes("rate-limited") || hc.text.includes("too fast")) {
+                    pushMessage(`\x1B[91mThe operation is too fast.\x1B[0m`, true, true)
                 } else pushMessage(`\x1B[91mUnable to understand: ${e.data}\x1B[0m`, true, true)
                 ws.close();
                 resolve();

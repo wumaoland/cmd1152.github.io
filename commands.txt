@@ -12,3 +12,4 @@ help
 mission
 asciimation
 jaj
+hc-list

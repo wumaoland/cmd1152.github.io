@@ -1,5 +1,5 @@
 ﻿//以下内容全为愚人节玩笑，请勿当真
-if (new Date().getMonth() + 1 == 4 && new Date().getDay() == 1) {
+if (new Date().getMonth() + 1 == 4 && new Date().getDate() == 1) {
   alert('紧急通知：\n' + getRandomItemFromArray([
     '24a被23开盒了，CrC团队即将解散',
     'mbot出现一种新型漏洞可以随意被利用踢人',

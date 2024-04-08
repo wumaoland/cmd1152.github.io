@@ -22,6 +22,7 @@
                     hc.users.forEach(user=>{
                       waitshow.push(`${user.trip?"["+user.trip+"]":""}${user.nick}`);
                     })
+                    waitshow.pop()
                     pushMessage(waitshow.join(", "))
                 }
                 if (hc.cmd == "warn") {

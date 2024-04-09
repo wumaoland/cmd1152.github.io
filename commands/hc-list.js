@@ -34,6 +34,9 @@
                         pushMessage(`\x1B[91mUnknown Error\x1B[0m`, true, true)
                     }
                 }
+                if (hc.cmd == "info" && hc.text.includes("denied access")) {
+                    pushMessage(`\x1B[91mThe specified channel is locked. Please use \x1B[37mhc-list [channel] [password]\x1B[91m to join, where password is the password for authtrip\x1B[0m`, true, true)
+                }
                 ws.close();
                 resolve();
             }
